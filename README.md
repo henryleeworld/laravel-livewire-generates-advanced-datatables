@@ -1,4 +1,4 @@
-# Laravel 8 Livewire 產生進階資料表格
+# Laravel 9 Livewire 產生進階資料表格
 
 引入 power-components 的 livewire-powergrid 套件來擴增產生進階資料表格，使用模型和集合產生動態資料表。
 
