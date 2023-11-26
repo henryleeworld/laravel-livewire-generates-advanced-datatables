@@ -2,7 +2,8 @@
 
 return [
     'buttons' => [
-        'filter'          => 'Aktionen',
+        'filter'            => 'Aktionen',
+        'clear_all_filters' => 'Alle löschen',
     ],
     'labels' => [
         'action'           => 'Aktionen',
@@ -10,7 +11,8 @@ return [
         'clear_filter'     => 'Filter löschen',
         'no_data'          => 'Keine Ergebnisse gefunden',
         'all'              => 'Alle',
-        'selected'         => 'Ausgewählt'
+        'selected'         => 'Ausgewählt',
+        'filtered'         => 'Gefiltert',
     ],
     'placeholders' => [
         'search' => 'Suche',
@@ -41,5 +43,25 @@ return [
         'contains_not' => 'enthält nicht',
         'starts_with'  => 'beginnt mit',
         'ends_with'    => 'endet with',
-    ]
+        'is_null'      => 'Null',
+        'is_not_null'  => 'nicht null ',
+        'is_blank'     => 'Leer',
+        'is_not_blank' => 'nicht leer',
+        'is_empty'     => 'unausgefüllt',
+        'is_not_empty' => 'ausgefüllt',
+    ],
+    'export' => [
+        'exporting' => 'Warten Sie mal!',
+        'completed' => 'Export abgeschlossen! Ihre Dateien stehen zum Download bereit',
+    ],
+    'soft_deletes' => [
+        'message_with_trashed' => 'Alle Datensätze anzeigen, einschließlich gelöschter.',
+        'message_only_trashed' => 'Nur gelöschte Datensätze anzeigen.',
+        'without_trashed'      => 'Ohne gelöschte',
+        'with_trashed'         => 'Mit gelöschten',
+        'only_trashed'         => 'Nur gelöschte',
+    ],
+    'multi_sort' => [
+        'message' => 'Multiple Suche ist aktiv',
+    ],
 ];

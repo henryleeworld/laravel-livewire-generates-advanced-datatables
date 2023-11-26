@@ -2,10 +2,8 @@
 
 return [
     'buttons' => [
-        'filter'          => 'فیلتر',
-        'export'          => 'ExportXLS',
-        'export_one'      => 'ExportXLS انتخاب شده',
-        'export_selected' => 'ExportXLS انتخاب شده'
+        'filter'            => 'فیلتر',
+        'clear_all_filters' => 'Clear all',
     ],
     'labels' => [
         'action'           => 'اقدام ها',
@@ -14,6 +12,7 @@ return [
         'no_data'          => 'هیچ رکوردی یافت نشد',
         'all'              => 'همه',
         'selected'         => 'انتخاب شد',
+        'filtered'         => 'پالوده',
     ],
     'placeholders' => [
         'search' => 'جستجو...',
@@ -24,18 +23,18 @@ return [
         'to'      => 'تا',
         'of'      => 'از',
         'results' => 'نتایج',
-        'all'     => 'همه'
+        'all'     => 'همه',
     ],
     'multi_select' => [
         'select' => 'انتخاب',
-        'all'    => 'همه'
+        'all'    => 'همه',
     ],
     'select' => [
         'select' => 'انتخاب',
-        'all'    => 'همه'
+        'all'    => 'همه',
     ],
     'boolean_filter' => [
-        'all' => 'همه'
+        'all' => 'همه',
     ],
     'input_text_options' => [
         'is'           => 'برابرباشد',
@@ -44,5 +43,25 @@ return [
         'contains_not' => 'شامل نباشد',
         'starts_with'  => 'شروع شود با',
         'ends_with'    => 'خاتمه یابد با',
-    ]
+        'is_null'      => 'is_null',
+        'is_not_null'  => 'is_not_null',
+        'is_blank'     => 'is_blank',
+        'is_not_blank' => 'is_not_blank',
+        'is_empty'     => 'is_empty',
+        'is_not_empty' => 'is_not_empty',
+    ],
+    'export' => [
+        'exporting' => 'لطفا صبر کنید!',
+        'completed' => 'صادرات به پایان رسید! فایل های شما آماده بارگیری هستند',
+    ],
+    'soft_deletes' => [
+        'message_with_trashed' => 'Displaying all records, including deleted ones.',
+        'message_only_trashed' => 'Displaying only deleted records.',
+        'without_trashed'      => 'Without deleted',
+        'with_trashed'         => 'With deleted',
+        'only_trashed'         => 'Only deleted',
+    ],
+    'multi_sort' => [
+        'message' => 'Multiple sort is active',
+    ],
 ];

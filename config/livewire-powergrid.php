@@ -19,30 +19,47 @@ return [
     | Plugins
     |--------------------------------------------------------------------------
     |
-    | Plugins used: bootstrap-select when bootstrap, flatpicker.js to datepicker.
+    | Plugins used: flatpickr.js to datepicker.
     |
     */
 
     'plugins' => [
         /*
-         * https://github.com/snapappointments/bootstrap-select
-         */
-        'bootstrap-select' => [
-            'js'  => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js',
-            'css' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css',
-        ],
-        /*
          * https://flatpickr.js.org
          */
         'flatpickr' => [
-            'js'      => 'https://cdn.jsdelivr.net/npm/flatpickr',
-            'css'     => 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css',
             'locales' => [
-                'pt_BR' => [
-                    'locale'     => 'pt_BR',
-                    'dateFormat' => 'd/m/Y H:i',
+                'zh_TW' => [
+                    'locale'     => 'zh-tw',
+                    'dateFormat' => 'Y-m-d H:i:s',
                     'enableTime' => true,
                     'time_24hr'  => true,
+                ],
+            ],
+        ],
+
+        'select' => [
+            'default' => 'tom',
+
+            /*
+             * TomSelect Options
+             * https://tom-select.js.org
+             */
+            'tom' => [
+                'plugins' => [
+                    'clear_button' => [
+                        'title' => 'Remove all selected options',
+                    ],
+                ],
+            ],
+
+            /*
+             * Slim Select options
+             * https://slimselectjs.com/
+             */
+            'slim' => [
+                'settings' => [
+                    'alwaysOpen' => false,
                 ],
             ],
         ],
@@ -76,17 +93,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | AlpineJS CDN
-    |--------------------------------------------------------------------------
-    |
-    | Define here the CDN source for imported AlpineJS
-    |
-    */
-
-    'alpinejs_cdn' => 'https://unpkg.com/alpinejs@3.9.6/dist/cdn.min.js',
-
-    /*
-    |--------------------------------------------------------------------------
     | New Release Notification
     |--------------------------------------------------------------------------
     |
@@ -99,4 +105,23 @@ return [
 
     'check_version' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Exportable class
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    'exportable' => [
+        'default'      => 'openspout_v4',
+        'openspout_v4' => [
+            'xlsx' => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v4\ExportToXLS::class,
+            'csv'  => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v4\ExportToCsv::class,
+        ],
+        'openspout_v3' => [
+            'xlsx' => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v3\ExportToXLS::class,
+            'csv'  => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v3\ExportToCsv::class,
+        ],
+    ],
 ];
