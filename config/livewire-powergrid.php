@@ -81,6 +81,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Persisting
+    |--------------------------------------------------------------------------
+    |
+    | PowerGrid supports persisting of the filters, columns and sorting.
+    | 'session': persist in the session.
+    | 'cookies': persist with cookies (default).
+    |
+    */
+
+    'persist_driver' => 'cookies',
+
+    /*
+    |--------------------------------------------------------------------------
     | Cache
     |--------------------------------------------------------------------------
     |
@@ -123,5 +136,20 @@ return [
             'xlsx' => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v3\ExportToXLS::class,
             'csv'  => \PowerComponents\LivewirePowerGrid\Components\Exports\OpenSpout\v3\ExportToCsv::class,
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Auto-Discover Models
+    |--------------------------------------------------------------------------
+    |
+    | PowerGrid will search for Models in the directories listed below.
+    | These Models be listed as options when you run the
+    | "artisan powergrid:create" command.
+    |
+    */
+
+    'auto_discover_models_paths' => [
+        app_path('Models'),
     ],
 ];

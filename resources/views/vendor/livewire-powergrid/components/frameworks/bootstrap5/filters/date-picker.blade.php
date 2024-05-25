@@ -7,21 +7,21 @@
     'type' => 'datetime',
 ])
 @php
-    unset($filter['className']);
-    extract($filter);
-    
+    $params = data_get($filter, 'params');
+    $field = data_get($filter, 'field');
+    $title = data_get($column, 'title');
+
     $customConfig = [];
     if ($params) {
         foreach ($params as $key => $value) {
             $customConfig[$key] = $value;
         }
     }
-    
+
     $params = [
         'type' => $type,
         'dataField' => $field,
         'tableName' => $tableName,
-        'filterKey' => 'enabledFilters.datetime.' . $field,
         'label' => $title,
         'locale' => config('livewire-powergrid.plugins.flatpickr.locales.' . app()->getLocale()),
         'onlyFuture' => data_get($customConfig, 'only_future', false),
@@ -30,21 +30,22 @@
     ];
 @endphp
 <div
-    wire:ignore
+    wire:ignore.self
     x-data="pgFlatpickr(@js($params))"
 >
     <div
-        class="{{ $theme->baseClass }}"
-        style="{{ $theme->baseStyle }}"
+        class="{{ data_get($theme, 'baseClass') }}"
+        style="{{ data_get($theme, 'baseStyle') }}"
     >
         <form autocomplete="off">
             <input
-                id="input_{{ $column }}"
+                id="input_{{ $field }}"
                 x-ref="rangeInput"
+                wire:model="filters.{{ $type }}.{{ $field }}.formatted"
                 autocomplete="off"
-                data-field="{{ $column }}"
-                style="{{ $theme->inputStyle }} {{ data_get($column, 'headerStyle') }}"
-                class="power_grid {{ $theme->inputClass }} {{ data_get($column, 'headerClass') }}"
+                data-field="{{ $field }}"
+                style="{{ data_get($theme, 'inputStyle') }} {{ data_get($column, 'headerStyle') }}"
+                class="power_grid {{ data_get($theme, 'inputClass') }} {{ data_get($column, 'headerClass') }}"
                 type="text"
                 readonly
                 placeholder="{{ trans('livewire-powergrid::datatable.placeholders.select') }}"

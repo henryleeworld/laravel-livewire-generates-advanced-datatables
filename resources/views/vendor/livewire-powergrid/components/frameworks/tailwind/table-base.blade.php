@@ -4,22 +4,21 @@
 >
     <div
         id="power-grid-table-container"
-        class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
+        class="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8"
     >
         <div
             id="power-grid-table-base"
-            class="py-2 align-middle inline-block min-w-full w-full sm:px-6 lg:px-8"
+            class="p-3 align-middle inline-block min-w-full w-full sm:px-6 lg:px-8"
         >
 
-            @include($theme->layout->header, [
+            @include(data_get($theme, 'layout.header'), [
                 'enabledFilters' => $enabledFilters,
             ])
 
             @if (config('livewire-powergrid.filter') === 'outside')
                 @php
                     $filtersFromColumns = collect($columns)
-                        ->filter(fn($column) => filled($column->filters))
-                        ->pluck('filters');
+                        ->filter(fn($column) => filled($column->filters));
                 @endphp
 
                 @if ($filtersFromColumns->count() > 0)
@@ -37,14 +36,14 @@
                 @class([
                     'overflow-auto' => $readyToLoad,
                     'overflow-hidden' => !$readyToLoad,
-                    $theme->table->divClass,
+                    data_get($theme, 'table.divClass'),
                 ])
-                style="{{ $theme->table->divStyle }}"
+                style="{{ data_get($theme, 'table.divStyle') }}"
             >
                 @include($table)
             </div>
 
-            @include($theme->footer->view)
+            @include(data_get($theme, 'footer.view'))
         </div>
     </div>
 </div>

@@ -6,13 +6,18 @@
 ])
 
 @php
-    extract($filter);
-    unset($filter['className']);
+    $fieldClassName = data_get($filter, 'className');
+
+    $field = data_get($filter, 'field');
+
+    $componentAttributes = (array) data_get($filter, 'attributes');
+
+    $defaultAttributes = $fieldClassName::getWireAttributes($field, array_merge($filter, (array)$column));
+
+    $filterClasses = Arr::toCssClasses([data_get($theme, 'inputClass'), data_get($column, 'headerClass'), 'power_grid']);
     
-    $defaultAttributes = \PowerComponents\LivewirePowerGrid\Components\Filters\FilterNumber::getWireAttributes($field, $filter);
-    
-    $filterClasses = Arr::toCssClasses([$theme->inputClass, data_get($column, 'headerClass'), 'power_grid']);
-    
+    $placeholder = data_get($filter, 'placeholder');
+
     $params = array_merge([...data_get($filter, 'attributes'), ...$defaultAttributes, $filterClasses], $filter);
 @endphp
 
@@ -25,13 +30,13 @@
     />
 @else
     <div
-        class="{{ $theme->baseClass }}"
-        style="{{ $theme->baseStyle }}"
+        class="{{ data_get($theme, 'baseClass') }}"
+        style="{{ data_get($theme, 'baseStyle') }}"
     >
         <div>
             <input
                 {{ $defaultAttributes['inputStartAttributes'] }}
-                @if ($inline) style="{{ $theme->inputStyle }} {{ data_get($column, 'headerStyle') }}" @endif
+                @if ($inline) style="{{ data_get($theme, 'inputStyle') }} {{ data_get($column, 'headerStyle') }}" @endif
                 type="text"
                 class="{{ $filterClasses }}"
                 placeholder="{{ $placeholder['min'] ?? __('Min') }}"
@@ -40,7 +45,7 @@
         <div class="mt-1">
             <input
                 {{ $defaultAttributes['inputEndAttributes'] }}
-                @if ($inline) style="{{ $theme->inputStyle }} {{ data_get($column, 'headerStyle') }}" @endif
+                @if ($inline) style="{{ data_get($theme, 'inputStyle') }} {{ data_get($column, 'headerStyle') }}" @endif
                 type="text"
                 class="{{ $filterClasses }}"
                 placeholder="{{ $placeholder['max'] ?? __('Max') }}"

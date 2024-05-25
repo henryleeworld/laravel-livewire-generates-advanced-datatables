@@ -5,13 +5,17 @@
     'filter' => null,
 ])
 @php
-    unset($filter['className']);
-    extract($filter);
-    
-    $defaultAttributes = \PowerComponents\LivewirePowerGrid\Components\Filters\FilterBoolean::getWireAttributes($field, $title);
-    
-    $selectClasses = Arr::toCssClasses([$theme->selectClass, data_get($column, 'headerClass'), 'power_grid']);
-    
+    $fieldClassName = data_get($filter, 'className');
+    $field = data_get($filter, 'field');
+    $title = data_get($column, 'title');
+
+    $trueLabel = data_get($filter, 'trueLabel');
+    $falseLabel = data_get($filter, 'falseLabel');
+
+    $defaultAttributes = $fieldClassName::getWireAttributes($field, $title);
+
+    $selectClasses = Arr::toCssClasses([data_get($theme, 'selectClass'), data_get($column, 'headerClass'), 'power_grid']);
+
     $params = array_merge([...data_get($filter, 'attributes'), ...$defaultAttributes], $filter);
 @endphp
 
@@ -24,8 +28,8 @@
     />
 @else
     <div
-        class="{{ $theme->baseClass }}"
-        style="{{ $theme->baseStyle }}"
+        class="{{ data_get($theme, 'baseClass') }}"
+        style="{{ data_get($theme, 'baseStyle') }}"
     >
         <select
             style="{{ data_get($column, 'headerStyle') }}"
