@@ -2,8 +2,8 @@
 
 return [
     'buttons' => [
-        'clear_all_filters' => '全部清除',
         'filter'            => '過濾',
+        'clear_all_filters' => '全部清除',
     ],
     'labels' => [
         'action'           => '操作',
@@ -63,5 +63,13 @@ return [
     ],
     'multi_sort' => [
         'message' => '多列排序已啟用',
+    ],
+    'buttons_macros' => [
+        'confirm' => [
+            'message' => '您確定要執行此操作嗎？',
+        ],
+        'confirm_prompt' => [
+            'message' => "您確定要執行此操作嗎？ \n\n 輸入 :confirmValue 進行確認。",
+        ],
     ],
 ];

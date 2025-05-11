@@ -1,24 +1,29 @@
-@if(data_get($setUp, 'detail.state.' . $rowId))
+@if (data_get($setUp, 'detail.state.' . $rowId))
     @php
-        $rulesValues = $actionRulesClass->recoverFromAction($row, 'pg:rows');
+        $detailView = (bool) data_get(
+            collect($row->__powergrid_rules)
+                ->where('apply', true)
+                ->last(),
+            'detailView',
+        );
     @endphp
 
     <td colspan="999">
-        @if (filled($rulesValues['detailView']))
-            @includeWhen(data_get($setUp, 'detail.state.' . $row->{$primaryKey}),
+        @if ($detailView)
+            @includeWhen(data_get($setUp, 'detail.state.' . $row->{$this->realPrimaryKey}),
                 $rulesValues['detailView'][0]['detailView'],
                 [
-                    'id' => data_get($row, $primaryKey),
+                    'id' => data_get($row, $this->realPrimaryKey),
                     'options' => array_merge(
                         data_get($setUp, 'detail.options'),
                         $rulesValues['detailView']['0']['options']),
                 ]
             )
         @else
-            @includeWhen(data_get($setUp, 'detail.state.' . $row->{$primaryKey}),
+            @includeWhen(data_get($setUp, 'detail.state.' . $row->{$this->realPrimaryKey}),
                 data_get($setUp, 'detail.view'),
                 [
-                    'id' => data_get($row, $primaryKey),
+                    'id' => data_get($row, $this->realPrimaryKey),
                     'options' => data_get($setUp, 'detail.options'),
                 ]
             )

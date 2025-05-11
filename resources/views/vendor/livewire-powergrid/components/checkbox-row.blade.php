@@ -1,32 +1,37 @@
 @php
-    $rulesValues = $actionRulesClass->recoverFromAction($row, 'pg:checkbox');
-
     $inputAttributes = new \Illuminate\View\ComponentAttributeBag([
-        'class' => data_get($theme, 'checkbox.inputClass'),
+        'class' => theme_style($theme, 'checkbox.input'),
     ]);
 
-    if (filled($rulesValues['setAttributes'])) {
-        foreach ($rulesValues['setAttributes'] as $rulesAttributes) {
+    $rules = collect($row->__powergrid_rules)
+        ->where('apply', true)
+        ->where('forAction', \PowerComponents\LivewirePowerGrid\Components\Rules\RuleManager::TYPE_CHECKBOX)
+        ->last();
+
+    if (isset($rules['attributes'])) {
+        foreach ($rules['attributes'] as $key => $value) {
             $inputAttributes = $inputAttributes->merge([
-                $rulesAttributes['attribute'] => $rulesAttributes['value'],
+                $key => $value,
             ]);
         }
     }
+
+    $disable = (bool) data_get($rules, 'disable');
+    $hide = (bool) data_get($rules, 'hide');
+
 @endphp
 
-@if (filled($rulesValues['hide']))
+@if ($hide)
     <td
-        class="{{ data_get($theme, 'checkbox.thClass') }}"
-        style="{{ data_get($theme, 'checkbox.thStyle') }}"
+        class="{{ theme_style($theme, 'checkbox.th') }}"
     >
     </td>
-@elseif(filled($rulesValues['disable']))
+@elseif($disable)
     <td
-        class="{{ data_get($theme, 'checkbox.tdClass') }}"
-        style="{{ data_get($theme, 'checkbox.tdStyle') }}"
+        class="{{ theme_style($theme, 'checkbox.th') }}"
     >
-        <div class="{{ data_get($theme, 'checkbox.divClass') }}">
-            <label class="{{ data_get($theme, 'checkbox.labelClass') }}">
+        <div class="{{ theme_style($theme, 'checkbox.base') }}">
+            <label class="{{ theme_style($theme, 'checkbox.label') }}">
                 <input
                     {{ $inputAttributes }}
                     disabled
@@ -37,11 +42,10 @@
     </td>
 @else
     <td
-        class="{{ data_get($theme, 'checkbox.thClass') }}"
-        style="{{ data_get($theme, 'checkbox.thStyle')  }}"
+        class="{{ theme_style($theme, 'checkbox.th') }}"
     >
-        <div class="{{ data_get($theme, 'checkbox.divClass') }}">
-            <label class="{{ data_get($theme, 'checkbox.labelClass') }}">
+        <div class="{{ theme_style($theme, 'checkbox.base') }}">
+            <label class="{{ theme_style($theme, 'checkbox.label') }}">
                 <input
                     x-data="{}"
                     type="checkbox"

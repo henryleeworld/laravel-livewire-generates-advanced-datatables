@@ -7,6 +7,7 @@
     'tableName' => null,
     'showErrorBag' => null,
     'editable' => null,
+    'theme' => null,
 ])
 
 @php
@@ -36,13 +37,13 @@
     $content = !empty($value) || $value == '0' ? $value : $fallback;
 
     $params = [
-        'theme' => data_get($theme, 'name'),
+        'theme' => theme_style($theme, 'name'),
         'tableName' => $tableName,
-        'id' => data_get($row, $primaryKey),
+        'id' => data_get($row, $this->realPrimaryKey),
         'dataField' => $field,
         'content' => $content,
         'fallback' => $fallback,
-        'inputClass' => data_get($theme, 'editable.inputClass'),
+        'inputClass' => theme_style($theme, 'editable.input'),
         'saveOnMouseOut' => data_get($editable, 'saveOnMouseOut'),
     ];
 @endphp
@@ -68,15 +69,15 @@
         ></span>
     </div>
     <template
-        x-if="showEditable && !hashError"
+        x-if="showEditable"
         style="margin-bottom: 4px"
     >
         <div x-html="editableInput"></div>
     </template>
     @if ($showErrorBag)
-        @error($field . '.' . $row->{$primaryKey})
-            <div class="text-sm text-red-800 p-1 transition-all duration-200">
-                {{ str($message)->replace($field . '.' . $row->{$primaryKey}, $field) }}
+        @error($field . '.' . $row->{$this->realPrimaryKey})
+            <div x-ref="error" class="text-sm text-red-800 p-1 transition-all duration-200">
+                {{ str($message)->replace($field . '.' . $row->{$this->realPrimaryKey}, $field) }}
             </div>
         @enderror
     @endif

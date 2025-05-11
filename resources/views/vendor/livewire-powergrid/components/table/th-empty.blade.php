@@ -1,12 +1,10 @@
 <tr
-    class="{{ data_get($theme, 'table.trBodyClass') }}"
-    style="{{ data_get($theme, 'table.trBodyStyle') }}"
+    class="{{ theme_style($theme, 'table.header.tr') }}"
 >
     <th
-        class="{{ data_get($theme, 'table.tdBodyEmptyClass') }}"
-        style="{{ data_get($theme, 'table.tdBodyEmptyStyle') }}"
-        colspan="{{ ($checkbox ? 1 : 0) + count($columns) + (data_get($setUp, 'detail.showCollapseIcon') ? 1 : 0) }}"
+        class="{{ theme_style($theme, 'table.body.tdEmpty') }}"
+        colspan="999"
     >
-            {!! $this->processNoDataLabel() !!}
+        {!! $this->processNoDataLabel !!}
     </th>
 </tr>

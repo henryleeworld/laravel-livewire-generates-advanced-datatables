@@ -1,4 +1,4 @@
-# Laravel 11 Livewire 產生進階資料表格
+# Laravel 12 Livewire 產生進階資料表格
 
 引入 power-components 的 livewire-powergrid 套件來擴增產生進階資料表格，使用模型和集合產生動態資料表。
 
@@ -35,5 +35,5 @@ $ npm run build
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/GVBf25q.png)
+![](https://i.imgur.com/h7zchif.png)
 > 使用使用者模型產生動態資料表
